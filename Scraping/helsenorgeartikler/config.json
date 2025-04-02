@@ -1,0 +1,39 @@
+{
+    "helsenorgeartikler": {
+        "startUrls": [],  
+        "aggressivePrune": true,
+        "clickElementsCssSelector": "main#main-content div.article button",
+        "clientSideMinChangePercentage": 15,
+        "crawlerType": "playwright:firefox",
+        "debugLog": false,
+        "debugMode": false,
+        "dynamicContentWaitSecs": 20,
+        "expandIframes": true,
+        "htmlTransformer": "readableTextIfPossible",
+        "ignoreCanonicalUrl": true,
+        "initialConcurrency": 0,
+        "keepUrlFragments": false,
+        "maxConcurrency": 2,
+        "maxCrawlDepth": 2,
+        "maxCrawlPages": 1000,
+        "maxRequestRetries": 5,
+        "maxResults": 9999999,
+        "maxScrollHeightPixels": 5000,
+        "maxSessionRotations": 10,
+        "minFileDownloadSpeedKBps": 128,
+        "proxyConfiguration": {
+            "useApifyProxy": true
+        },
+        "readableTextCharThreshold": 100,
+        "removeCookieWarnings": true,
+        "removeElementsCssSelector": "nav,style,svg",
+        "renderingTypeDetectionPercentage": 10,
+        "requestTimeoutSecs": 60,
+        "saveFiles": false,
+        "saveHtml": false,
+        "saveHtmlAsFile": false,
+        "saveMarkdown": true,
+        "saveScreenshots": false
+        
+    }
+}

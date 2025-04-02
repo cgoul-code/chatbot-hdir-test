@@ -1,0 +1,48 @@
+# Environment variables and settings
+.env
+.azure_settings.json
+
+# Temporary files and backup artifacts
+*.bak
+*.cvs
+*.csv
+*.xlsm
+*.xlsx
+
+
+# Exclude test-related files
+combined_*.*
+
+# Exclude data directories and files
+data*
+data/10k*
+data/10q*
+data/ikke^
+data_multi*
+data_recursive*
+
+# Exclude blobstorages
+
+blobstorage/chatbot/helsenorgeartikler*
+blobstorage/chatbot/*.json
+
+# Python-specific exclusions
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv
+build/
+dist/
+
+# Logs
+*.log
+
+# Ignore IDE/editor-specific files
+*.vscode/
+*.idea/
+.DS_Store
+
+# Ignore Azure deployment temporary files
+zipdeploy/
+

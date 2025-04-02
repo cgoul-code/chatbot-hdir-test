@@ -1,0 +1,131 @@
+[
+    {
+        "url": "https://www.helsenorge.no/gravid/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/fodsel/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/etter-fodsel/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/ufrivillig-barnloshet/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/spedbarn/",
+        "method": "GET"
+    }    ,
+    {
+        "url": "https://www.helsenorge.no/alkohol/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/kosthold-og-ernaring/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/rus-og-avhengighet/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/sex-og-samliv/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/snus-og-roykeslutt/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/sovnproblemer/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/trening-og-fysisk-aktivitet/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/vaksinasjon/",
+        "method": "GET"
+    },
+    {
+        "url": "https://www.helsenorge.no/undersokelse-og-behandling/langvarige-smerter/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/forstehjelp/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/giftinformasjon/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/kliniske-studier/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/medisiner/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/undersokelse-og-behandling/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/astma-og-allerg/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.nosykdom/hjerte-og-kar/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/diabetes/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/koronavirus/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/kjonnssykdommer/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/kreft/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/lunger-og-luftveier/",
+        "method": "GET"
+    }
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/psykiske-lidelser/",
+        "method": "GET"
+    }  
+    ,
+    {
+        "url": "https://www.helsenorge.no/sykdom/#undefined",
+        "method": "GET"
+    }
+   
+]
