@@ -36,81 +36,80 @@ def read_index_from_storage(storage):
 
 llm = LLMGPT4omini
 
-embed_model = AzureOpenAIEmbedding(
-    model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002,
-    api_key=os.getenv('AZURE_OPENAI_EMBEDDINGS_API_KEY'),
-    api_version=os.getenv('AZURE_OPENAI_EMBEDDINGS_API_VERSJON'),
-    azure_endpoint=os.getenv('AZURE_OPENAI_EMBEDDINGS_AZURE_ENDPOINT'),
-    azure_deployment=os.getenv('AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME'),  
-)
-
 from typing_extensions import TypedDict
 
 # Graph state
 class State(TypedDict):
     topic: str
     joke: str
-    improved_joke: str
-    final_joke: str
+    story: str
+    poem: str
+    combined_output: str
    
-def generate_joke(state: State) :
+def call_llm_1(state: State) :
     messages = [
         ChatMessage(role="system", content="You are a helpfull assistant" ),
         ChatMessage(role="user", content=f"Write a short joke about {state['topic']}")  ]
     response = llm.chat(messages)
-    print(f'Response generate_joke: {response.message.content}')
+    print(f'Response call_llm_1: {response.message.content}')
 
     return {'joke': response.message.content}
 
-def improve_joke(state: State) :
+def call_llm_2(state: State) :
     messages = [
         ChatMessage(role="system", content="You are a helpfull assistant" ),
-        ChatMessage(role="user", content=f"Make that joke funnier by adding wordplay: {state['joke']}")  ]
+        ChatMessage(role="user", content=f"Write a story about: {state['topic']}")  ]
     response = llm.chat(messages)
-    print(f'Response improve_joke: {response.message.content}')
+    print(f'Response call_llm_2: {response.message.content}')
 
-    return {'improved_joke': response.message.content}
+    return {'story': response.message.content}
 
-def polish_joke(state: State) :
+def call_llm_3(state: State) :
     messages = [
         ChatMessage(role="system", content="You are a helpfull assistant" ),
-        ChatMessage(role="user", content=f"Make a surprising twist to this joke: {state['improved_joke']}")  ]
+        ChatMessage(role="user", content=f"Write a poem about: {state['topic']}")  ]
     response = llm.chat(messages)
-    print(f'Response final_joke: {response.message.content}')
+    print(f'Response call_llm_3: {response.message.content}')
 
-    return {'final_joke': response.message.content}
+    return {'poem': response.message.content}
 
-def check_punchline(state: State):
-    if "?" in state['joke'] or "!" in state['joke']:
-        return "Pass"
-    else:
-        return "Fail"
+
+def aggregator(state: State):
+    """Combine the joke and story into a single output"""
+
+    combined = f"Here's a story, joke, and poem about {state['topic']}!\n\n"
+    combined += f"STORY:\n{state['story']}\n\n"
+    combined += f"JOKE:\n{state['joke']}\n\n"
+    combined += f"POEM:\n{state['poem']}"
+    return {"combined_output": combined}
+
+
     
 from langgraph.graph import StateGraph, START, END
 from IPython.display import Image, display
 
-#build workflow
-workflow = StateGraph(State)
+# Build workflow
+parallel_builder = StateGraph(State)
 
-# Add Nodes
-workflow.add_node("generate_joke", generate_joke)
-workflow.add_node("improve_joke", improve_joke)
-workflow.add_node("polish_joke", polish_joke)
+# Add nodes
+parallel_builder.add_node("call_llm_1", call_llm_1)
+parallel_builder.add_node("call_llm_2", call_llm_2)
+parallel_builder.add_node("call_llm_3", call_llm_3)
+parallel_builder.add_node("aggregator", aggregator)
 
 # Add edges to connect nodes
-workflow.add_edge(START, "generate_joke")
-workflow.add_conditional_edges(
-    "generate_joke", check_punchline, {"Pass": "improve_joke", "Fail": END}
-)
-workflow.add_edge("improve_joke", "polish_joke")
-workflow.add_edge("polish_joke", END)
-
-# Compile
-chain = workflow.compile()
+parallel_builder.add_edge(START, "call_llm_1")
+parallel_builder.add_edge(START, "call_llm_2")
+parallel_builder.add_edge(START, "call_llm_3")
+parallel_builder.add_edge("call_llm_1", "aggregator")
+parallel_builder.add_edge("call_llm_2", "aggregator")
+parallel_builder.add_edge("call_llm_3", "aggregator")
+parallel_builder.add_edge("aggregator", END)
+parallel_workflow = parallel_builder.compile()
 
 # Show workflow
-#display(Image(chain.get_graph().draw_mermaid_png()))
+#display(Image(parallel_workflow.get_graph().draw_mermaid_png()))
 
-state = chain.invoke({"topic": "cats"})
-
-
+# Invoke
+state = parallel_workflow.invoke({"topic": "cats"})
+print(state["combined_output"])
