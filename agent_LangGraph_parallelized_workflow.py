@@ -36,29 +36,22 @@ def read_index_from_storage(storage):
 
 llm = LLMGPT4omini
 
-embed_model = AzureOpenAIEmbedding(
-    model=OpenAIEmbeddingModelType.TEXT_EMBED_ADA_002,
-    api_key=os.getenv('AZURE_OPENAI_EMBEDDINGS_API_KEY'),
-    api_version=os.getenv('AZURE_OPENAI_EMBEDDINGS_API_VERSJON'),
-    azure_endpoint=os.getenv('AZURE_OPENAI_EMBEDDINGS_AZURE_ENDPOINT'),
-    azure_deployment=os.getenv('AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME'),  
-)
-
 from typing_extensions import TypedDict
 
 # Graph state
 class State(TypedDict):
     topic: str
     joke: str
-    improved_joke: str
-    final_joke: str
+    story: str
+    poem: str
+    combined_output: str
    
-def generate_joke(state: State) :
+def call_llm_1(state: State) :
     messages = [
         ChatMessage(role="system", content="You are a helpfull assistant" ),
         ChatMessage(role="user", content=f"Write a short joke about {state['topic']}")  ]
     response = llm.chat(messages)
-    print(f'Response generate_joke: {response.message.content}')
+    print(f'Response call_llm_1: {response.message.content}')
 
     return {'joke': response.message.content}
 
