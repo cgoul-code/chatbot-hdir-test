@@ -1,0 +1,36 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__spørsmål__([<p>__spørsmål__</p>]):::first
+	llm_kall_svar(llm_kall_svar)
+	svar_relevans_vurdering(svar_relevans_vurdering)
+	svarbygger(svarbygger)
+	lesbarhet_vurdering(lesbarhet_vurdering)
+	llm_gjor_svar_mer_lesbart(llm_gjor_svar_mer_lesbart)
+	llm_kall_kortversjon_generator(llm_kall_kortversjon_generator)
+	llm_kall_sammendrag_generator(llm_kall_sammendrag_generator)
+	kildeliste_generator(kildeliste_generator)
+	aggregator(aggregator)
+	__endelig_svar__([<p>__endelig_svar__</p>]):::last
+	__spørsmål__ --> llm_kall_svar;
+	aggregator --> __endelig_svar__;
+	llm_kall_svar --> svar_relevans_vurdering;
+	llm_kall_kortversjon_generator --> aggregator;
+	llm_kall_sammendrag_generator --> aggregator;
+	llm_gjor_svar_mer_lesbart --> lesbarhet_vurdering;
+	kildeliste_generator --> aggregator;
+	svarbygger --> lesbarhet_vurdering;
+	svarbygger --> llm_kall_kortversjon_generator;
+	svarbygger --> llm_kall_sammendrag_generator;
+	svarbygger --> kildeliste_generator;
+	svar_relevans_vurdering -. &nbsp;Akseptert&nbsp; .-> svarbygger;
+	svar_relevans_vurdering -. &nbsp;Avvist + Tilbakemelding&nbsp; .-> __endelig_svar__;
+
+	lesbarhet_vurdering -. &nbsp;Avvist + Tilbakemelding&nbsp; .-> llm_gjor_svar_mer_lesbart;
+    	lesbarhet_vurdering -. &nbsp;Akseptert&nbsp; .-> aggregator;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
